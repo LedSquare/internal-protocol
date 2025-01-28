@@ -1,0 +1,26 @@
+{
+    "name": "ledsquare/internal-protocol",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Webregul"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "InternalProtocol\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.2"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "InternalProtocol\\InternalProtocolServiceProvider"
+            ]
+        }
+    }
+}
