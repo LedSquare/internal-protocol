@@ -4,14 +4,13 @@ namespace InternalProtocol;
 
 use Illuminate\Support\ServiceProvider;
 
-class InternalProtocolServiceProvider extends ServiceProvider
+class InternalApiProtocolServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
      */
     public function register(): void
     {
-
     }
 
     /**
@@ -19,8 +18,5 @@ class InternalProtocolServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->publishes([
-            __DIR__ . './stubs/provider.stub' => app_path('Providers/InternalApiProtocolServiceProvider.php'),
-        ], 'provider');
     }
 }
