@@ -3,6 +3,8 @@
 namespace InternalApiProtocol\{{serviceName}}\{{version}};
 
 use InternalProtocol\EndpointRequest;
+use InternalProtocol\VersionAPI;
+use InternalProtocol\MethodName;
 
 /**
  * @method Response send(string $baseDomain, array $headers)

@@ -22,5 +22,8 @@ class InternalProtocolServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . './stubs/provider.stub' => app_path('Providers/InternalApiProtocolServiceProvider.php'),
         ], 'provider');
+        $this->publishes([
+            __DIR__ . './config/internal.php' => config_path('internal.php'),
+        ], 'config');
     }
 }

@@ -1,13 +1,32 @@
 <?php
 
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Symfony\Component\Yaml\Yaml;
 
-class Generate
+class Generate extends Command
 {
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'app:generate';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Command description';
+
+    /**
+     * Execute the console command.
+     */
     public function handle(): void
     {
-
         $file = Yaml::parseFile(base_path('.scribe/endpoints/03.yaml'));
 
         $serviceName = Str::ucfirst('user');
@@ -34,7 +53,7 @@ class Generate
 
             $method = Str::upper($endpoint['httpMethods'][0]);
 
-            $basePath = base_path("InternalApiProtocol/{$serviceName}");
+            $basePath = "app/InternalApiProtocol/{$serviceName}";
 
             $dirPath = "$basePath/$version";
 
@@ -44,13 +63,21 @@ class Generate
 
             $filepath = "$dirPath/{$class}Endpoint.php";
 
+            $this->dirExists($dirPath);
+
             if (file_exists($filepath)) {
-                // $this->info("Skipping {$filePath}, already exists.");
-                dump("Skipping $filePath, already exists.");
+                $this->info("Skipping {$filepath}, already exists.");
                 continue;
             }
 
-            $this->generateClass($version, $method, $route, $class, $serviceName, $admin);
+            if (file_exists($filepath)) {
+                $this->error("Файл:($filepath) уже существует");
+                continue;
+            }
+
+            $generatedClass = $this->generateClass($version, $method, $route, $class, $serviceName, $admin);
+
+            file_put_contents($filepath, $generatedClass);
         }
 
     }
@@ -72,8 +99,8 @@ class Generate
         $stub = str_replace(['{{route}}'], $route, $stub);
         $stub = str_replace(['{{class}}'], $class, $stub);
         $stub = str_replace(['{{serviceName}}'], $serviceName, $stub);
-        dd($stub);
-        return '';
+
+        return $stub;
     }
 
     private function cutVersion(string $route): string
@@ -84,6 +111,15 @@ class Generate
         return implode('/', $route);
     }
 
+    private function dirExists(string $dir): void
+    {
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+    }
+
 }
+
+
 
 

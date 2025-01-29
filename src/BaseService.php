@@ -24,7 +24,7 @@ abstract class BaseService
      * @throws InternalException
      * @return array
      */
-    public function callEndpoint(EndpointRequest $endpointRequest): array
+    final public function callEndpoint(EndpointRequest $endpointRequest): array
     {
         $this->before();
 
