@@ -7,14 +7,14 @@ use InternalProtocol\EndpointRequest;
 /**
  * @method Response send(string $baseDomain, array $headers)
  */
-final class {{class}}Request extends EndpointRequest
+final class {{class}}Endpoint extends EndpointRequest
 {
     public function __construct(
-        protected VersionAPI $version = VersionAPI::{{version}};
+        protected VersionAPI $version = VersionAPI::{{version}},
         protected MethodName $method = MethodName::{{method}},
-        protected string $route = {{route}};
-        protected array $data = [];
-        protected array $headers = [];
+        protected string $route = '{{route}}',
+        protected array $data = [],
+        protected array $headers = [],
     ){
     }
 }
