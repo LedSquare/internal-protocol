@@ -11,7 +11,7 @@ final class {{class}}Request extends EndpointRequest
 {
     public function __construct(
         protected VersionAPI $version = VersionAPI::{{version}};
-        protected MethodName $method = {{method}};
+        protected MethodName $method = MethodName::{{method}},
         protected string $route = {{route}};
         protected array $data = [];
         protected array $headers = [];
