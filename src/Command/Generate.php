@@ -13,14 +13,14 @@ class Generate extends Command
      *
      * @var string
      */
-    protected $signature = 'app:generate';
+    protected $signature = 'internal:generate';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = "Generate Endpoint clases based on scribe yaml's ";
 
     /**
      * Execute the console command.
