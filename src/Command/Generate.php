@@ -34,7 +34,7 @@ class Generate extends Command
         $EndpointsWithoutName = 0;
         foreach ($file['endpoints'] as $endpoint) {
             if (!preg_match('#^v(\d+)/(?P<route>internal|admin)/#', $endpoint['uri'], $matches)) {
-                dd('Не повезло тебе');
+                continue;
             }
 
             $route = $this->cutVersion($endpoint['uri']);
@@ -66,12 +66,9 @@ class Generate extends Command
             $this->dirExists($dirPath);
 
             if (file_exists($filepath)) {
-                $this->info("Skipping {$filepath}, already exists.");
-                continue;
-            }
+                $this->info("Файл:($filepath) уже существует");
+                $this->newLine();
 
-            if (file_exists($filepath)) {
-                $this->error("Файл:($filepath) уже существует");
                 continue;
             }
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace InternalProtocol;
+namespace InternalProtocol\Core;
 
 use Illuminate\Http\Client\Response;
 use InternalProtocol\EndpointRequest;
-use InternalProtocol\InternalException;
+use InternalProtocol\Exceptions\InternalException;
 
 /**
  * @template TEndpoint of EndpointRequest
  */
-abstract class BaseService
+abstract class InternalApiService
 {
     public function __construct(
         protected string $baseDomain,
@@ -21,7 +21,6 @@ abstract class BaseService
     /**
      * 
      * @param TEndpoint $endpointRequest
-     * @throws InternalException
      * @return array
      */
     final public function callEndpoint(EndpointRequest $endpointRequest): array
@@ -42,5 +41,4 @@ abstract class BaseService
      * @return void
      */
     abstract protected function after(Response $response): void;
-
 }

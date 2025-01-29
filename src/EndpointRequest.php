@@ -4,7 +4,7 @@ namespace InternalProtocol;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use InternalProtocol\MethodName;
+use InternalProtocol\Exceptions\InternalProtocolException;
 
 /**
  * @method Response send(string $baseDomain, array $headers)
@@ -20,6 +20,7 @@ abstract class EndpointRequest
     /**
      * @param string $baseDomain
      * @param array $headers
+     * @throws InternalProtocolException
      * @return mixed<\Illuminate\Http\Client\Response|null>
      */
     public function send(string $baseDomain, array $headers): mixed
@@ -35,7 +36,7 @@ abstract class EndpointRequest
         return Http::withHeaders($headers)->{$method}($url, $this->data);
     }
 
-    protected function checkSlash(string $str): string
+    final protected function checkSlash(string $str): string
     {
         if (substr($str, 0) !== '/') {
             return $str = '/' . $str;
